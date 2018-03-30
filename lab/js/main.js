@@ -125,11 +125,30 @@ of the application to report this information.
 
 ===================== */
 
-var dataset = ""
+var dataset = "https://raw.githubusercontent.com/CPLN-692-401/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson";
 var featureGroup;
 
+function getColor(d) {
+    return d === "MON"  ? '#e41a1c' :
+           d === "TUE"  ? '#377eb8' :
+           d === "WED"  ? '#4daf4a' :
+           d === "THU"  ? '#984ea3' :
+           d === "FRI"  ? '#ff7f00' :
+                          '#ffff33' ;
+}
+
+function getDay(d) {
+    return d === "MON"  ? 'Monday' :
+           d === "TUE"  ? 'Tuesday' :
+           d === "WED"  ? 'Wednesday' :
+           d === "THU"  ? 'Thursday' :
+           d === "FRI"  ? 'Friday' :
+                          'Hmmm..... Not sure ' ;
+}
+
 var myStyle = function(feature) {
-  return {};
+    return {fillColor: getColor(feature.properties.COLLDAY), weight: 1};
+
 };
 
 var showResults = function() {
@@ -154,12 +173,13 @@ var eachFeatureFunction = function(layer) {
     you can use in your application.
     ===================== */
     console.log(layer.feature);
+    $('.day-of-week').text(getDay(features.properties.COLLDAY));
     showResults();
   });
 };
 
 var myFilter = function(feature) {
-  return true;
+  return feature.properties.COLLDAY != " ";
 };
 
 $(document).ready(function() {

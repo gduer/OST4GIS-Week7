@@ -26,7 +26,7 @@ var tileOpts = {
 var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', tileOpts).addTo(map);
 
 // Ajax to grab json
-var getData = $.ajax('https://raw.githubusercontent.com/CPLN-692-401/datasets/master/json/world-country-capitals.json')
+var getData = $.ajax('https://raw.githubusercontent.com/CPLN-692-401/datasets/master/json/world-country-capitals.json');
 
 /* =====================
   Parse and store data for later use
@@ -119,7 +119,7 @@ var onStringFilterChange = function(e) {
   filterAndPlot();
 };
 
-var onSelectChange = function() {
+var onSelectChange = function(e) {
   selectValue = e.target.value;
   filterAndPlot();
 };
